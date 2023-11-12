@@ -30,6 +30,7 @@
 </head>
 <body>
     <div id="colorText">Нажмите где угодно, чтобы вернуться к редактированию.</div>
+    <br />
     <div id="iterationText"></div>
 
     <script>
@@ -52,7 +53,7 @@
                         document.body.style.backgroundColor = currentColor;
 
                         // Update the #iterationText element with current iteration information
-                        document.getElementById('iterationText').innerText = `Итерация: ${currentIndex + 1} из ${repetitions}`;
+                        document.getElementById('iterationText').innerText = `Итерация: ${Math.floor(currentIndex / shuffledColors.length) + 1} из ${repetitions}`;
 
                         currentIndex++;
 
