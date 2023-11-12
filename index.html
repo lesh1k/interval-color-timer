@@ -63,6 +63,9 @@
         <!-- Color fields will be dynamically added here -->
     </div>
 
+    <label for="randomOrder">Показать цвета в случайном порядке: </label>
+    <input type="checkbox" id="randomOrder">
+
     <button onclick="startColorLoop()">Начать</button>
     <button onclick="addColorField()">Добавить поле цвета</button>
     <button onclick="removeColorField()">Удалить последнее поле цвета</button>
@@ -80,8 +83,7 @@
             window.location.href = 'display.html';
         }
 
-
-        function saveToLocalStorage(repetitions, colorFields, durationFields) {
+        function saveToLocalStorage(repetitions, colorFields, durationFields, randomOrder) {
             var colorData = [];
             colorFields.forEach(function(colorField, index) {
                 var color = colorField.value;
@@ -91,7 +93,8 @@
 
             var dataToStore = {
                 repetitions: repetitions,
-                colorData: colorData
+                colorData: colorData,
+                randomOrder: randomOrder
             };
 
             localStorage.setItem('userData', JSON.stringify(dataToStore));
@@ -108,6 +111,7 @@
                 var colorFields = document.getElementById('colorFields');
 
                 document.getElementById('repetitions').value = userData.repetitions;
+                document.getElementById('randomOrder').checked = userData.randomOrder;
 
                 userData.colorData.forEach(function(data) {
                     var newColorField = document.createElement('div');
@@ -128,8 +132,8 @@
             var newColorField = document.createElement('div');
             newColorField.className = 'color-field';
 
-            // Generate a random color
-            var randomColor = getRandomColor();
+            // Generate a random color if randomOrder is checked
+            var randomColor = document.getElementById('randomOrder').checked ? getRandomColor() : "#000000";
 
             newColorField.innerHTML = `
                 <label for="color">Цвет (X): </label>
@@ -138,15 +142,6 @@
                 <input type="number" class="durationInput" min="1" value="1">
             `;
             colorFields.appendChild(newColorField);
-        }
-        
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
         }
 
         function removeColorField() {
@@ -157,10 +152,28 @@
             }
         }
 
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
         // Load data from localStorage on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadFromLocalStorage();
         });
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
     </script>
 </body>
 </html>
