@@ -22,10 +22,15 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
+
+        #iterationText {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <div id="colorText">Нажмите где угодно, чтобы вернуться к редактированию.</div>
+    <div id="iterationText"></div>
 
     <script>
         function displayColors() {
@@ -36,6 +41,7 @@
                 var colorData = userData.colorData;
                 var repetitions = userData.repetitions;
                 var currentIndex = 0;
+                var currentRepetition = 1;
 
                 function showNextColor() {
                     // Shuffle colorData for each repetition
@@ -44,7 +50,10 @@
                     if (currentIndex < shuffledColors.length * repetitions) {
                         var currentColor = shuffledColors[currentIndex % shuffledColors.length].color;
                         document.body.style.backgroundColor = currentColor;
-                        document.getElementById('colorText').innerText = 'Цвет: ' + currentColor;
+
+                        // Update the #iterationText element with current iteration information
+                        document.getElementById('iterationText').innerText = `Итерация: ${currentIndex + 1} из ${repetitions}`;
+
                         currentIndex++;
 
                         setTimeout(showNextColor, shuffledColors[currentIndex % shuffledColors.length].duration * 1000);
