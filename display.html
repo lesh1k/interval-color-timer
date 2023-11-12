@@ -55,18 +55,27 @@
                     if (userData.randomOrder) {
                         shuffledColors = shuffleArray(shuffledColors);
                     }
+
                     if (currentIndex < shuffledColors.length * repetitions) {
                         var currentColor = shuffledColors[currentIndex % shuffledColors.length].color;
-                        document.body.style.backgroundColor = currentColor;
+                        
+                        // Set the striped background before transitioning to the actual color
+                        document.body.style.background = 'repeating-linear-gradient(45deg, #000, #000 10px, #fff 10px, #fff 20px)';
+                        
+                        setTimeout(function() {
+                            // Transition to the actual color
+                            document.body.style.background = currentColor;
 
-                        // Update the #currentColor element with current color information
-                        document.getElementById('currentColorText').innerText = `Цвет: ${currentIndex % shuffledColors.length + 1} из ${shuffledColors.length}`;
-                        // Update the #iterationText element with current iteration information
-                        document.getElementById('iterationText').innerText = `Итерация: ${Math.floor(currentIndex / shuffledColors.length) + 1} из ${repetitions}`;
+                            // Update the #currentColor element with current color information
+                            document.getElementById('currentColorText').innerText = `Цвет: ${currentIndex % shuffledColors.length + 1} из ${shuffledColors.length}`;
+                            // Update the #iterationText element with current iteration information
+                            document.getElementById('iterationText').innerText = `Итерация: ${Math.floor(currentIndex / shuffledColors.length) + 1} из ${repetitions}`;
 
-                        currentIndex++;
+                            currentIndex++;
 
-                        setTimeout(showNextColor, shuffledColors[currentIndex % shuffledColors.length].duration * 1000);
+                            // Call showNextColor after the specified duration
+                            setTimeout(showNextColor, shuffledColors[currentIndex % shuffledColors.length].duration * 1000);
+                        }, 500); // 500 milliseconds (0.5s) for the striped background
                     } else {
                         // Redirect to the index.html page after the color loop ends
                         window.location.href = 'index.html';
