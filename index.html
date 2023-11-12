@@ -124,13 +124,26 @@
             var colorFields = document.getElementById('colorFields');
             var newColorField = document.createElement('div');
             newColorField.className = 'color-field';
+
+            // Generate a random color
+            var randomColor = getRandomColor();
+
             newColorField.innerHTML = `
                 <label for="color">Цвет (X): </label>
-                <input type="color" class="colorInput" value="#ff0000">
+                <input type="color" class="colorInput" value="${randomColor}">
                 <label for="duration">Длительность (N): </label>
                 <input type="number" class="durationInput" min="1" value="1">
             `;
             colorFields.appendChild(newColorField);
+        }
+        
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
 
         function removeColorField() {
