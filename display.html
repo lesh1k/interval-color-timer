@@ -17,6 +17,11 @@
             text-align: center;
             transition: background-color 0.5s ease;
         }
+
+        #colorText {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -33,12 +38,16 @@
                 var currentIndex = 0;
 
                 function showNextColor() {
-                    if (currentIndex < colorData.length * repetitions) {
-                        var currentColor = colorData[currentIndex % colorData.length].color;
+                    // Shuffle colorData for each repetition
+                    var shuffledColors = shuffleArray([...colorData]);
+
+                    if (currentIndex < shuffledColors.length * repetitions) {
+                        var currentColor = shuffledColors[currentIndex % shuffledColors.length].color;
                         document.body.style.backgroundColor = currentColor;
+                        document.getElementById('colorText').innerText = 'Цвет: ' + currentColor;
                         currentIndex++;
 
-                        setTimeout(showNextColor, colorData[currentIndex % colorData.length].duration * 1000);
+                        setTimeout(showNextColor, shuffledColors[currentIndex % shuffledColors.length].duration * 1000);
                     } else {
                         // Redirect to the index.html page after the color loop ends
                         window.location.href = 'index.html';
@@ -60,6 +69,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             displayColors();
         });
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
     </script>
 </body>
 </html>
