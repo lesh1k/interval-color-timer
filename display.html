@@ -17,11 +17,6 @@
             text-align: center;
             transition: background-color 0.5s ease;
         }
-
-        #colorText {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -41,7 +36,6 @@
                     if (currentIndex < colorData.length * repetitions) {
                         var currentColor = colorData[currentIndex % colorData.length].color;
                         document.body.style.backgroundColor = currentColor;
-                        document.getElementById('colorText').innerText = 'Цвет: ' + currentColor;
                         currentIndex++;
 
                         setTimeout(showNextColor, colorData[currentIndex % colorData.length].duration * 1000);
