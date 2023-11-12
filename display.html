@@ -14,24 +14,52 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
         }
 
         #colorDisplay {
             width: 200px;
             height: 200px;
-            border: 2px solid black;
-            cursor: pointer;
+            border: 1px solid #000;
         }
     </style>
 </head>
 <body>
-    <div id="colorDisplay" onclick="goBack()"></div>
+    <div id="colorDisplay"></div>
 
     <script>
-        function goBack() {
-            window.location.href = 'index.html';
+        function displayColors() {
+            var userData = localStorage.getItem('userData');
+
+            if (userData) {
+                userData = JSON.parse(userData);
+                var colorData = userData.colorData;
+                var repetitions = userData.repetitions;
+                var currentIndex = 0;
+
+                function showNextColor() {
+                    if (currentIndex < colorData.length * repetitions) {
+                        var currentColor = colorData[currentIndex % colorData.length].color;
+                        document.getElementById('colorDisplay').style.backgroundColor = currentColor;
+                        currentIndex++;
+
+                        setTimeout(showNextColor, colorData[currentIndex % colorData.length].duration * 1000);
+                    } else {
+                        // Once all repetitions are done, you can redirect or perform any other action here
+                        // For example, redirecting back to the edit page:
+                        window.location.href = 'edit.html';
+                    }
+                }
+
+                // Start showing colors
+                showNextColor();
+            }
         }
+
+        // Call the function to display colors when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            displayColors();
+        });
     </script>
 </body>
 </html>
