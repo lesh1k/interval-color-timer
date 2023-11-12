@@ -30,7 +30,6 @@
 
         .color-field {
             margin-bottom: 20px; /* Increased margin for better separation */
-            cursor: move;
         }
 
         .colorInput {
@@ -53,7 +52,6 @@
             clear: both;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
     <h1>Цикл Цвета - Редактирование</h1>
@@ -68,7 +66,7 @@
     <button onclick="startColorLoop()">Начать</button>
     <button onclick="addColorField()">Добавить поле цвета</button>
     <button onclick="removeColorField()">Удалить последнее поле цвета</button>
-     touch: true // Enable touch support
+
     <script>
         function startColorLoop() {
             var repetitions = document.getElementById('repetitions').value;
@@ -119,8 +117,6 @@
                     `;
                     colorFields.appendChild(newColorField);
                 });
-
-                initSortable();
             }
         }
 
@@ -135,7 +131,6 @@
                 <input type="number" class="durationInput" min="1" value="1">
             `;
             colorFields.appendChild(newColorField);
-            initSortable();
         }
 
         function removeColorField() {
@@ -144,14 +139,6 @@
             if (children.length > 1) {
                 colorFields.removeChild(children[children.length - 1]);
             }
-        }
-
-        function initSortable() {
-            new Sortable(document.getElementById('colorFields'), {
-                animation: 150,
-                handle: '.color-field',
-                touch: true // Enable touch support
-            });
         }
 
         // Load data from localStorage on page load
