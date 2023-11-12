@@ -7,6 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            flex-direction: column;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -75,7 +76,7 @@
 
                             // Call showNextColor after the specified duration
                             setTimeout(showNextColor, shuffledColors[currentIndex % shuffledColors.length].duration * 1000);
-                        }, 500); // 500 milliseconds (0.5s) for the striped background
+                        }, 100); // 500 milliseconds (0.5s) for the striped background
                     } else {
                         // Redirect to the index.html page after the color loop ends
                         window.location.href = 'index.html';
