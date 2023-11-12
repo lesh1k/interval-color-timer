@@ -14,18 +14,10 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        #colorDisplay {
-            width: 200px;
-            height: 200px;
-            border: 1px solid #000;
         }
     </style>
 </head>
 <body>
-    <div id="colorDisplay"></div>
 
     <script>
         function displayColors() {
@@ -40,14 +32,13 @@
                 function showNextColor() {
                     if (currentIndex < colorData.length * repetitions) {
                         var currentColor = colorData[currentIndex % colorData.length].color;
-                        document.getElementById('colorDisplay').style.backgroundColor = currentColor;
+                        document.body.style.backgroundColor = currentColor;
                         currentIndex++;
 
                         setTimeout(showNextColor, colorData[currentIndex % colorData.length].duration * 1000);
                     } else {
-                        // Once all repetitions are done, you can redirect or perform any other action here
-                        // For example, redirecting back to the edit page:
-                        window.location.href = 'edit.html';
+                        // Redirect to the index.html page after the color loop ends
+                        window.location.href = 'index.html';
                     }
                 }
 
@@ -55,6 +46,12 @@
                 showNextColor();
             }
         }
+
+        // Add a click event listener to the entire body
+        document.body.addEventListener('click', function() {
+            // Redirect to the index.html page when clicked anywhere on the body
+            window.location.href = 'index.html';
+        });
 
         // Call the function to display colors when the page loads
         document.addEventListener('DOMContentLoaded', function() {
