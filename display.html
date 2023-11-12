@@ -58,7 +58,7 @@
                         document.body.style.backgroundColor = currentColor;
 
                         // Update the #currentColor element with current color information
-                        document.getElementById('currentColor').innerText = `Цвет: ${currentIndex % shuffledColors.length + 1} из ${shuffledColors.length}`;
+                        document.getElementById('currentColorText').innerText = `Цвет: ${currentIndex % shuffledColors.length + 1} из ${shuffledColors.length}`;
                         // Update the #iterationText element with current iteration information
                         document.getElementById('iterationText').innerText = `Итерация: ${Math.floor(currentIndex / shuffledColors.length) + 1} из ${repetitions}`;
 
