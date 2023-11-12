@@ -64,7 +64,7 @@
     </div>
 
     <label for="randomOrder">Показать цвета в случайном порядке: </label>
-    <input type="checkbox" id="randomOrder">
+    <input type="checkbox" id="randomOrder" checked>
 
     <button onclick="startColorLoop()">Начать</button>
     <button onclick="addColorField()">Добавить поле цвета</button>
@@ -75,9 +75,10 @@
             var repetitions = document.getElementById('repetitions').value;
             var colorFields = document.querySelectorAll('.colorInput');
             var durationFields = document.querySelectorAll('.durationInput');
+            var randomOrder = document.getElementById('randomOrder').checked;
         
             // Save color, duration, and repetitions values to localStorage
-            saveToLocalStorage(repetitions, colorFields, durationFields);
+            saveToLocalStorage(repetitions, colorFields, durationFields, randomOrder);
         
             // Redirect to display.html
             window.location.href = 'display.html';
