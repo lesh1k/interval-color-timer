@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            flex-direction: column;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -16,9 +15,9 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            transition: background-color 0.5s ease;
+            background: repeating-linear-gradient(45deg, #000, #000 10px, #fff 10px, #fff 20px); /* Striped background */
+            transition: background-color 0.5s ease; /* Transition to the actual color */
         }
-
         #colorText {
             font-size: 24px;
             margin-bottom: 20px;
