@@ -14,22 +14,18 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
-            color: #333;
             text-align: center;
+            transition: background-color 0.5s ease;
         }
 
-        #colorDisplay {
-            width: 200px;
-            height: 200px;
-            border: 1px solid #000;
+        #colorText {
+            font-size: 24px;
             margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="colorDisplay"></div>
-    <p>Чтобы вернуться к редактированию, нажмите где угодно.</p>
+    <div id="colorText">Чтобы вернуться к редактированию, нажмите где угодно.</div>
 
     <script>
         function displayColors() {
@@ -44,7 +40,8 @@
                 function showNextColor() {
                     if (currentIndex < colorData.length * repetitions) {
                         var currentColor = colorData[currentIndex % colorData.length].color;
-                        document.getElementById('colorDisplay').style.backgroundColor = currentColor;
+                        document.body.style.backgroundColor = currentColor;
+                        document.getElementById('colorText').innerText = 'Цвет: ' + currentColor;
                         currentIndex++;
 
                         setTimeout(showNextColor, colorData[currentIndex % colorData.length].duration * 1000);
