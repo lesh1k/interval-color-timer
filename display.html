@@ -50,9 +50,12 @@
                 var currentRepetition = 1;
 
                 function showNextColor() {
-                    // Shuffle colorData for each repetition
-                    var shuffledColors = shuffleArray([...colorData]);
+                    var shuffledColors = [...colorData];
 
+                    // Shuffle colorData for each repetition if randomOrder is true
+                    if (userData.randomOrder) {
+                        shuffledColors = shuffleArray(shuffledColors);
+                    }
                     if (currentIndex < shuffledColors.length * repetitions) {
                         var currentColor = shuffledColors[currentIndex % shuffledColors.length].color;
                         document.body.style.backgroundColor = currentColor;
