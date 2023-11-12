@@ -100,7 +100,10 @@
         function loadFromLocalStorage() {
             var userData = localStorage.getItem('userData');
 
-            if (userData) {
+            if (!userData) {
+                // If no data is stored, add at least one color field
+                addColorField();
+            } else {
                 userData = JSON.parse(userData);
                 var colorFields = document.getElementById('colorFields');
 
