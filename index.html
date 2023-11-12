@@ -55,12 +55,7 @@
     <input type="number" id="repetitions" min="1" value="1">
 
     <div id="colorFields">
-        <div class="color-field">
-            <label for="color">Цвет (X): </label>
-            <input type="color" class="colorInput" value="#ff0000">
-            <label for="duration">Длительность (N): </label>
-            <input type="number" class="durationInput" min="1" value="1">
-        </div>
+        <!-- Color fields will be dynamically added here -->
     </div>
 
     <button onclick="startColorLoop()">Начать</button>
@@ -100,6 +95,29 @@
             localStorage.setItem('colorData', JSON.stringify(colorData));
         }
 
+        function loadFromLocalStorage() {
+            var colorData = localStorage.getItem('colorData');
+
+            if (colorData) {
+                colorData = JSON.parse(colorData);
+                var colorFields = document.getElementById('colorFields');
+
+                colorData.forEach(function(data) {
+                    var newColorField = document.createElement('div');
+                    newColorField.className = 'color-field';
+                    newColorField.innerHTML = `
+                        <label for="color">Цвет (X): </label>
+                        <input type="color" class="colorInput" value="${data.color}">
+                        <label for="duration">Длительность (N): </label>
+                        <input type="number" class="durationInput" min="1" value="${data.duration}">
+                    `;
+                    colorFields.appendChild(newColorField);
+                });
+
+                initSortable();
+            }
+        }
+
         function addColorField() {
             var colorFields = document.getElementById('colorFields');
             var newColorField = document.createElement('div');
@@ -133,8 +151,10 @@
             window.location.href = 'display.html';
         }
 
-        // Initialize sortable on page load
-        document.addEventListener('DOMContentLoaded', initSortable);
+        // Load data from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+        });
     </script>
 </body>
 </html>
